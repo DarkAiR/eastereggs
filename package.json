@@ -1,6 +1,6 @@
 {
   "name": "@darkair/eastereggs",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Lib with great effects to color your application",
   "author": "Dmitry DarkAiR Romanov",
   "license": "GPL-3.0-or-later",
@@ -8,6 +8,10 @@
     "url": "https://github.com/DarkAiR/eastereggs/issues"
   },
   "homepage": "https://github.com/DarkAiR/eastereggs#readme",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "main": "dist/index.js",
   "files": [
     "dist"
@@ -29,10 +33,10 @@
     "serve": "webpack serve --mode=development",
     "build": "yarn run lint  &&  webpack --config webpack.dev.js",
     "build:prod": "yarn run lint  &&  webpack --config webpack.config.prod.js",
+    "release": "yarn version",
     "lint": "eslint -f stylish",
-    "postversion": "git push --tags && git push && echo \"Successfully released version $npm_package_version!\"",
-    "prepublish": "yarn run build",
-    "postpublish": "echo \"Successfully released version $npm_package_version!\"",
+    "preversion": "yarn login && yarn run build",
+    "postversion": "git push --tags && yarn publish dist && git push && echo \"Successfully\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {},
@@ -68,8 +72,7 @@
     "webpack-bundle-analyzer": "^4.1.0",
     "webpack-cli": "^4.2.0",
     "webpack-dev-server": "^3.11.0",
-    "webpack-merge": "^5.4.0",
-    "yarn-release": "^1.10.2"
+    "webpack-merge": "^5.4.0"
   },
   "eslintConfig": {
     "root": true,
