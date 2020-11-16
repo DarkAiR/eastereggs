@@ -1,6 +1,6 @@
 {
-  "name": "eastereggs",
-  "version": "0.0.6",
+  "name": "@darkair/eastereggs",
+  "version": "0.0.7",
   "description": "Lib with great effects to color your application",
   "author": "Dmitry DarkAiR Romanov",
   "license": "GPL-3.0-or-later",
@@ -30,7 +30,8 @@
     "build": "yarn run lint  &&  webpack --config webpack.dev.js",
     "build:prod": "yarn run lint  &&  webpack --config webpack.config.prod.js",
     "lint": "eslint -f stylish",
-    "publish": "yarn version",
+    "preversion": "",
+    "postversion": "yarn run build  &&  git push --tags && yarn publish dist --new-version=$npm_package_version --tag=$npm_package_version --access=public && git push && echo \"Successfully released version $npm_package_version!\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {},
