@@ -1,6 +1,6 @@
 {
   "name": "@darkair/eastereggs",
-  "version": "0.0.7",
+  "version": "0.0.9",
   "description": "Lib with great effects to color your application",
   "author": "Dmitry DarkAiR Romanov",
   "license": "GPL-3.0-or-later",
@@ -30,8 +30,9 @@
     "build": "yarn run lint  &&  webpack --config webpack.dev.js",
     "build:prod": "yarn run lint  &&  webpack --config webpack.config.prod.js",
     "lint": "eslint -f stylish",
-    "preversion": "",
-    "postversion": "yarn run build  &&  git push --tags && yarn publish dist --new-version=$npm_package_version --tag=$npm_package_version --access=public && git push && echo \"Successfully released version $npm_package_version!\"",
+    "postversion": "git push --tags && git push && echo \"Successfully released version $npm_package_version!\"",
+    "prepublish": "yarn run build",
+    "postpublish": "echo \"Successfully released version $npm_package_version!\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {},
@@ -67,7 +68,8 @@
     "webpack-bundle-analyzer": "^4.1.0",
     "webpack-cli": "^4.2.0",
     "webpack-dev-server": "^3.11.0",
-    "webpack-merge": "^5.4.0"
+    "webpack-merge": "^5.4.0",
+    "yarn-release": "^1.10.2"
   },
   "eslintConfig": {
     "root": true,
