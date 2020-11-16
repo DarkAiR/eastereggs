@@ -1,6 +1,6 @@
 {
   "name": "@darkair/eastereggs",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "Lib with great effects to color your application",
   "author": "Dmitry DarkAiR Romanov",
   "license": "GPL-3.0-or-later",
@@ -33,9 +33,7 @@
     "release:minor": "echo \"~1\" && yarn version --minor && yarn run build && yarn publish dist",
     "release:major": "echo \"~1\" && yarn version --major && yarn run build && yarn publish dist",
     "lint": "eslint -f stylish",
-    "preversion": "echo \"~2\"",
-    "postversion": "echo \"~3\"",
-    "postversion2": "git push --tags && yarn publish dist && git push && echo \"Successfully\"",
+    "postversion": "git push --tags && git push && echo \"Successfully\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {},
