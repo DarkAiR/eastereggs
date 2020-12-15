@@ -1,21 +1,20 @@
 import { Effect } from '../Effect';
-import {ISettings} from "@/interfaces/ISettings";
 
 interface Options {
-    grow: number;                       // grow coeff. 0 - always growing, 1 - never growing
-    leftover: number;                   // leftover coeff. 0 - no leftover, 1 - full leftover
-    fadeSpeed: number;                  // speed fade
-    discreteness: number;
+    grow?: number;                       // grow coeff. 0 - always growing, 1 - never growing
+    leftover?: number;                   // leftover coeff. 0 - no leftover, 1 - full leftover
+    fadeSpeed?: number;                  // speed fade. 0 - never face, 0.5 - to much fade
+    discreteness?: number;
     canvas: HTMLCanvasElement;
 }
 
-export class Corode extends Effect<Options> {
+export class Corrode extends Effect<Options> {
     private fillPoints: [number, number][] = [];
     private field: boolean[] = [];
 
-    constructor(options: ISettings) {
+    constructor(options: Options) {
         super({
-            ...((): Options => ({
+            ...((): Required<Options> => ({
                 grow: 0.8,
                 leftover: 0,
                 fadeSpeed: 0.05,
@@ -26,7 +25,7 @@ export class Corode extends Effect<Options> {
         });
     }
 
-    async runEffect(...args): Promise<void>{
+    async startEffect(...args): Promise<void>{
         while (this.isRunning()) {
             await this.onCanvasProcess();
             await new Promise(resolve => setTimeout(resolve, 10));
@@ -112,7 +111,7 @@ export class Corode extends Effect<Options> {
             sumLightness += l;
         }
         context.putImageData(imageData, x * this.o.discreteness, y * this.o.discreteness);
-        return sumLightness / (this.o.discreteness * this.o.discreteness) > this.o.leftover;
+        return sumLightness / (this.o.discreteness * this.o.discreteness) > (Math.random() * this.o.leftover * 2 - this.o.leftover);
     }
 
     rgbToHls(r: number, g: number, b: number): [number, number, number] {
